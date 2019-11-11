@@ -1,5 +1,7 @@
 package com.github.happylynx.timee;
 
+//import sun.misc.Signal;
+
 import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
@@ -11,7 +13,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import sun.misc.Signal;
+/*
+on signal handling
+option to enable it for native-image: `-H:+AllowVMInspection` https://www.graalvm.org/docs/reference-manual/tools/#starting-graalvm-visualvm
+bug on windows: https://github.com/oracle/graal/issues/1784
+ */
 
 public class Main {
 
@@ -83,7 +89,7 @@ public class Main {
         if (args.length == 0) {
             return;
         }
-        Signal.handle(new Signal("INT"), sig -> System.exit(0));
+//        Signal.handle(new Signal("INT"), sig -> System.exit(0));
         try {
             final Process process = new ProcessBuilder(args).inheritIO().start();
             process.waitFor();
